@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import NavBar from './components/NavBar'
+import Loading from './components/Loading'
 import LoginPrompt from './components/LoginPrompt'
 import UploadPrompt from './components/UploadPrompt'
 import { CardColumns, CardImg, Card } from 'reactstrap'
 import './App.css';
 import SearchBar from './components/SearchBox';
+import { queryImage } from './api'
 
 class App extends Component {
   constructor(props) {
@@ -14,11 +16,18 @@ class App extends Component {
       queryText: '',
       isLoginVisible: false,
       isUploadVisible: false,
+      isLoading: false,
     };
   }
 
   handleSearch = () => {
-    //Update images
+    this.setState({ isLoading: true })
+    queryImage(this.state.queryText)
+      .then(res => {
+        const urls = res.results.map(result => result.url)
+        this.setState({ images: urls, isLoading: false })
+      })
+      .catch(e => alert('Invalid API Key'))
   }
 
   handleQueryChange = (e) => {
@@ -44,16 +53,20 @@ class App extends Component {
               handleSearch={this.handleSearch}
             />
           </NavBar>
-          <CardColumns >
-            {this.state.images.map(image =>
-              <Card>
-                <CardImg
-                  top
-                  width="100%"
-                  src="https://images.pexels.com/photos/617278/pexels-photo-617278.jpeg?auto=compress&cs=tinysrgb&h=350" alt="cat" />
-              </Card>
-            )}
-          </CardColumns>
+          {this.state.isLoading ?
+            <Loading />
+            :
+            <CardColumns >
+              {this.state.images.map(image =>
+                <Card key={image}>
+                  <CardImg
+                    top
+                    width="100%"
+                    src="https://images.pexels.com/photos/617278/pexels-photo-617278.jpeg?auto=compress&cs=tinysrgb&h=350" alt="cat" />
+                </Card>
+              )}
+            </CardColumns>
+          }
         </div>
         <LoginPrompt isOpen={this.state.isLoginVisible} toggle={this.toggleLogin} />
         <UploadPrompt isOpen={this.state.isUploadVisible} toggle={this.toggleUpload} />

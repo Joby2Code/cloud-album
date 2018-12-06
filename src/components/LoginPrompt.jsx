@@ -1,5 +1,6 @@
 import React from 'react';
 import { Input, Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
+import { setApiKey } from '../api'
 
 export default class LogoutPrompt extends React.Component {
   constructor(props) {
@@ -11,8 +12,12 @@ export default class LogoutPrompt extends React.Component {
     this.setState({ apiKeyText: e.target.value })
   }
 
-  handleLogin = (e) => {
-    //set api key
+  handleLogin = () => {
+    const key = this.state.apiKeyText
+    if (key.length > 0) {
+      setApiKey(key)
+      this.props.toggle()
+    }
   }
 
   render() {

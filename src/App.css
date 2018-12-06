@@ -1,0 +1,11 @@
+.load-container {
+    width: 100vw;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.la-ball-beat {
+    color: #333;
+}
