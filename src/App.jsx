@@ -21,13 +21,13 @@ class App extends Component {
   }
 
   handleSearch = () => {
-    this.setState({ isLoading: true })
+    this.setState({ isLoading: true });
     queryImage(this.state.queryText)
       .then(res => {
-        const urls = res.results.map(result => result.url)
-        this.setState({ images: urls, isLoading: false })
+        const urls = res.results.map(result => result.url);
+        this.setState({ images: urls, isLoading: false });
       })
-      .catch(e => alert('Invalid API Key'))
+      .catch(e => alert('Invalid API Key'));
   }
 
   handleQueryChange = (e) => {
@@ -35,11 +35,11 @@ class App extends Component {
   }
 
   toggleLogin = () => {
-    this.setState({ isLoginVisible: !this.state.isLoginVisible })
+    this.setState({ isLoginVisible: !this.state.isLoginVisible });
   }
 
   toggleUpload = () => {
-    this.setState({ isUploadVisible: !this.state.isUploadVisible })
+    this.setState({ isUploadVisible: !this.state.isUploadVisible });
   }
 
   render() {
@@ -62,7 +62,8 @@ class App extends Component {
                   <CardImg
                     top
                     width="100%"
-                    src="https://images.pexels.com/photos/617278/pexels-photo-617278.jpeg?auto=compress&cs=tinysrgb&h=350" alt="cat" />
+                    src="https://images.pexels.com/photos/617278/pexels-photo-617278.jpeg?auto=compress&cs=tinysrgb&h=350"
+                    alt="cat" />
                 </Card>
               )}
             </CardColumns>
