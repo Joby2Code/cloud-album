@@ -1,5 +1,5 @@
-import React from 'react';
-import { InputGroup, InputGroupAddon, Input, Button } from 'reactstrap'
+import React from "react";
+import { InputGroup, InputGroupAddon, Input, Button } from "reactstrap";
 
 const SearchBar = ({ queryText, handleQueryChange, handleSearch }) => {
   return (
@@ -11,7 +11,7 @@ const SearchBar = ({ queryText, handleQueryChange, handleSearch }) => {
         </InputGroupAddon>
       </InputGroup>
     </div>
-  )
-}
+  );
+};
 
-export default SearchBar
+export default SearchBar;
